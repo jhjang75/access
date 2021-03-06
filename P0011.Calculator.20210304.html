@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Calculator[별별 웹 특강]</title>
+  <style>
+    table{border-collapse:collapse;}
+    td{padding:20px 40px;
+      text-align:center;}
+    input{text-align:right;
+      border:none;}
+    input:focus{outline:none;}
+  </style>
+</head>
+
+<body>
+  <table align="center" border="1">
+    <tr>
+      <td colspan="4">
+        <input type="text" id="display">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4">
+        <input type="text" id="result">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3" onclick="reset()">AC</td>
+      <td onclick="add('/')">/</td>
+    </tr>
+    <tr>
+      <td onclick="add(7)">7</td>
+      <td onclick="add(8)">8</td>
+      <td onclick="add(9)">9</td>
+      <td onclick="add('*')">*</td>
+    </tr>
+    <tr>
+      <td onclick="add(4)">4</td>
+      <td onclick="add(5)">5</td>
+      <td onclick="add(6)">6</td>
+      <td onclick="add('-')">-</td>
+    </tr>
+    <tr>
+      <td onclick="add(1)">1</td>
+      <td onclick="add(2)">2</td>
+      <td onclick="add(3)">3</td>
+      <td onclick="add('+')">+</td>
+    </tr>
+    <tr>
+      <td colspan="2" onclick="add(0)">0</td>
+      <td onclick="add('.')">.</td>
+      <td onclick="calculate()">=</td>
+    </tr>
+  </table>
+  <script>
+    var numberClicked=false;//전역변수로 설정
+    function add(char){/*
+      if(numberClicked==false){//연산자가 입력
+        if(isNan(char)==true){//또 연산자인 경우
+          //아무것도 하지 않는다.
+        }else{//연산자가 아난 경우
+          document.getElementById('display').value+=char;//식 뒤에 값을 추가
+        }
+      }else{//숫자가 입력*/
+        document.getElementById('display').value+=char;//식 뒤에 값을 추가
+      }/*
+
+      //
+      if(isNan(char)==true){
+        numberClicked=false;
+      }else{
+        numberClicked=true;
+      }
+    }*/
+    function calculate(){
+      var display=document.getElementById('display');
+      var result=eval(display.value);
+      document.getElementById('result').value=result;
+    }
+    function reset(){
+      document.getElementById('display').value='';
+      document.getElementById('result').value='';
+    }
+  </script>
+</body>
+<html>
