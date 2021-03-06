@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Basic Calculator</title>
+  <meta charset="UTF-8">
+  <script>
+      var op = "";
+      function oper(test){
+         op = test;
+      }
+      function cal(){
+        var v1=number(document.getElementById("v1").value);
+        var v2=number(document.getElementById("v2").value);
+
+        var re;
+        if(op=="+"){re=v1+v2;}
+        else if(op=="-"){re=v1-v2;}
+        else if(op=="*"){re=v1*v2;}
+        else if(op=="/"){re=v1/v2;}
+        document.getElementById("re").value=re;
+      }
+  </script>
+</head>
+
+<body>
+  <table>
+    <tr><td align="center">Value1
+      </td>
+    </tr>
+    <tr><td align="center">
+        <input type="text" id="v1" value="">
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        <input type="button" id="op" value="+" onClick=oper("+")>
+        <input type="button" id="op" value="-" onClick=oper("-")>
+        <input type="button" id="op" value="*" onClick=oper("*")>
+        <input type="button" id="op" value="/" onClick=oper("/")>
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        Value2
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        <input type="text" id="v2" value="">
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        <input type="button" id="eq" value="=" onclick="cal()">
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        Result
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        <input type="text" id="re" value="">
+      </td>
+    </tr>
+  </table>
+</body>
+<html>
