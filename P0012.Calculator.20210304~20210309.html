@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!--css 그리드와 자바스크립트를 이용해서 계산기 만들기-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <!--user-scalable=yes모바일에서 접속시 모바일 크기에 맞춘 화면을 렌더링 설정-->
+  <!--"viewport" 설정
+width 속성은 뷰포트의 크기를 조정합니다. 특정한 숫자를 사용해 width=600 이라고 할 수도 있고
+device-width와 같은 특정한 값을 사용할 수도 있습니다. 여기서 나온 device-width는 100% 스케일에서
+CSS 픽셀들로 계산된 화면의 폭을 의미합니다. 또한 "initial-scale=1.0"은 초기 로드시 줌 레벨을 설정함을 의미하며,
+"user-scalable=yes"라는 부분은 화면을 확대하거나 축소함.(줌인,줌아웃)을 할 수 있도록 설정함을 의미합니다.
+반대의 경우는 no 라고 설정하시면 됩니다.-->
+  <title>Calculator-kanhi's coding</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <!--<input type="text" value="0" disabled>-->
+    <input type="text" disabled>
+    <div class="button-wrap">
+      <!--ac class 추가
+      버튼 클릭 시 data-type에 따라 동작을 다르게 처리하기 위해
+      숫자 버튼을 제외하고 data-type 속성 추가:버튼 클릭 시 input에 추가-->
+      <button data-type="ac" class="ac">AC</button>
+      <button data-type="operator">&divide;</button>
+      <button>7</button>
+      <button>8</button>
+      <button>9</button>
+      <button data-type="operator">&times;</button>
+      <button>4</button>
+      <button>5</button>
+      <button>6</button>
+      <button data-type="operator">-</button>
+      <button>1</button>
+      <button>2</button>
+      <button>3</button>
+      <button data-type="operator">+</button>
+      <!--zero class 추가-->
+      <button class="zero">0</button>
+      <button>.</button>
+      <button data-type="equals" class="equals">=</button>
+    </div>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
