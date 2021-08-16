@@ -2,7 +2,19 @@
 var http = require('http');
 var url = require('url');
 var queenny = require('./lib/queenny');
+/*
+const EventEmitter = require('events');
 
+class MyEmitter extends EventEmitter {
+  foo() {
+    this.emit('test');
+  }
+}
+const myEmitter = new MyEmitter();
+myEmitter.on('test', () => console.log('Yay, it works!'));
+
+myEmitter.foo();
+*/
 var inventory = document.getElementById('inventory');
 
 inventory.addEventListener('click', function(){
