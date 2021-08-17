@@ -18,7 +18,7 @@ myEmitter.foo();
 var inventory = document.getElementById('inventory');
 
 inventory.addEventListener('click', function(){
-  app = http.createServer(function(request,response){
+  http.createServer(function(request,response){
     var _url = request.url;
     var queryData = url.parse(_url, true).query;
     var pathname = url.parse(_url, true).pathname;
