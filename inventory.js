@@ -22,7 +22,7 @@ inventory.addEventListener('click', function(){
     var _url = request.url;
     var queryData = url.parse(_url, true).query;
     var pathname = url.parse(_url, true).pathname;
-    if(pathname === '/'){
+    if(pathname === '/access'){
         if(queryData.id === undefined){
            queenny.home(request, response);
         } else {
