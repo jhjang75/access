@@ -14,7 +14,30 @@
 </head>
 <body>
   <h3><a href="/">Main</a></h3>
-  <p>
+  <script>
+    if(pathname === '/queenny'){
+          if(queryData.id === undefined){
+             queenny.home(request, response);
+          } else {
+             queenny.page(request, response);
+          }
+      //} else if(pathname === '/create'){
+          //queenny.create(request, response);
+      //} else if(pathname === '/create_process'){
+          //queenny.create_process(request, response);
+      } else if(pathname === '/update'){
+          queenny.update(request, response);
+      } else if(pathname === '/update_process'){
+          queenny.update_process(request, response);
+      //} else if(pathname === '/delete_process'){
+          //queenny.delete_process(request, response);
+      } else {
+          response.writeHead(404);
+          response.end('Not found');
+      }
+    //}).listen(80);
+  </script>
+  <div class="create">
     <form action="/create_process" method="post">
       <input type="text" name="color" placeholder="Color No.">
       <input type="text" name="amount" placeholder="수량">
@@ -22,8 +45,8 @@
       <input type="submit">
     </form>
     <a href="/create">create</a>
-  </p>
-  <div>
+  </div>
+  <div class="update">
     <form action="/update_process" method="post">
       <input type="hidden" name="seq" value="${result[0].seq}">
       <p>
@@ -41,7 +64,7 @@
     </form>
     <a href="/create">create</a> <a href="/update?id=${topic[0].id}">update</a>
   </div>
-  <div>
+  <div class="delete">
     <form action="delete_process" method="post">
       <input type="hidden" name="seq" value="${queryData.id}">
       <input type="submit" value="delete">
@@ -108,6 +131,46 @@
     return list;
   }
 }
+-->
+<!--
+// - Yunee Queenny Inventory, 08/09/2021~08/13/2021 -
+var http = require('http');
+var url = require('url');
+var queenny = require('./lib/modules');
+
+exports.queenny = function(request, response){
+  //http.createServer(function(request,response){
+    var _url = request.url;
+    //console.log(_url);
+    var queryData = url.parse(_url, true).query;
+    //console.log(queryData);
+    var pathname = url.parse(_url, true).pathname;
+    //console.log(pathname);
+    if(pathname === '/queenny'){
+        if(queryData.id === undefined){
+           queenny.home(request, response);
+        } else {
+           queenny.page(request, response);
+        }
+    //} else if(pathname === '/create'){
+        //queenny.create(request, response);
+    //} else if(pathname === '/create_process'){
+        //queenny.create_process(request, response);
+    } else if(pathname === '/update'){
+        queenny.update(request, response);
+    } else if(pathname === '/update_process'){
+        queenny.update_process(request, response);
+    //} else if(pathname === '/delete_process'){
+        //queenny.delete_process(request, response);
+    } else {
+        response.writeHead(404);
+        response.end('Not found');
+    }
+  //}).listen(80);
+}
+//`https://jhjang75.github.io/access/`
+//https://jhjang75.github.io/access/inventory.js
+//http://localhost:8080/
 -->
 <!--
 // - Yunee Queenny Inventory Modules, 08/09/2021~ -
