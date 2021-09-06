@@ -1,1 +1,276 @@
-
+<!--2021.09.05 Queenny Inventory Refactoring from Node.js-mySQL-->
+<!--// - Yunee Queenny Inventory Template, 08/09/2021~ -
+module.exports = {
+  HTML:function(title, list, control){
+    return `-->
+<!doctype html>
+<html>
+<head>
+  <title>Queenny</title>
+  <meta charset="utf-8">
+  <style>
+    table, th, td { border: 1px solid black; border-collapse: collapse; }
+    table {width:100%;}
+    input:focus {outline:none;}
+    /* input {width:90%;border:0 solid black;} */
+  </style>
+</head>
+<body>
+  <h3><a href="/">Main</a></h3>
+  <p>
+    <form action="/create_process" method="post">
+      <input type="text" name="color" placeholder="Color No.">
+      <input type="text" name="amount" placeholder="수량">
+      <input type="text" name="remarks" placeholder="비고">
+      <input type="submit">
+    </form>
+    <a href="/create">create</a>
+  </p>
+  <div>
+    <form action="/update_process" method="post">
+      <input type="hidden" name="seq" value="${result[0].seq}">
+      <p>
+        <input type="text" name="color" value="${result[0].color}">
+      </p>
+      <p>
+        <input type="text" name="amount" value="${result[0].amount}">
+      </p>
+      <p>
+        <input type="text" name="remarks" value="${result[0].remarks}">
+      </p>
+      <p>
+        <button type="submit">수정하기</button>
+      </p>
+    </form>
+    <a href="/create">create</a> <a href="/update?id=${topic[0].id}">update</a>
+  </div>
+  <table>
+    ${list}
+  </table>
+</body>
+</html>
+<!--    `;
+  },
+  list:function(results){
+    var l=results.length;
+    var j=0;
+    var list = '<tr>';
+    while(j < l/16){
+      if(l-(16*(j+1))>=0){
+        var n=16*(j+1);
+      }else {
+        var n=l;
+      }
+      var m=16*j;
+      //color
+      var i = m;
+      while(i < n){
+        list = list + `
+        <th bgcolor="#FFFF00">
+          <a href="/queenny?id=${results[i].seq}">
+            ${results[i].color}
+          </a>
+        </th>
+        `;
+        i = i + 1;
+      }
+      list = list+'</tr>';
+      //amount
+      list = list+'<tr>';
+      var i = m;
+      while(i < n){
+        list = list + `
+        <td align="center">
+            ${results[i].amount}
+        </td>
+        `;
+        i = i + 1;
+      }
+      list = list+'</tr>';
+      //remarks
+      list = list+'<tr>';
+      var i = m;
+      while(i < n){
+        list = list + `
+        <td align="center">
+            ${results[i].remarks}
+        </td>
+        `;
+        i = i + 1;
+      }
+      list = list+'</tr>';
+      j=j+1;
+      list=list+'<tr>';
+    }
+    return list;
+  }
+}
+-->
+<!--
+// - Yunee Queenny Inventory Modules, 08/09/2021~ -
+var con = require('./db');
+var template = require('./template.js');
+var url = require('url');
+var qs = require('querystring');
+exports.home = function(request, response){
+    con.query(`SELECT * FROM queenny`, function(error,results){
+        var title = 'Queenny';
+        var list = template.list(results);
+        var html = template.HTML(title, list,``
+            //` <a href="/create">create</a>`
+        );
+        response.writeHead(200);
+        response.end(html);
+    });
+}
+exports.page = function(request, response){
+    var _url = request.url;
+    var queryData = url.parse(_url, true).query;
+    con.query(`SELECT * FROM queenny`, function(error,results){
+        if(error){throw error;}
+        con.query(`SELECT * FROM queenny WHERE seq=?`,[queryData.id], 
+            function(error2, result){
+            if(error2){throw error2;}
+            var title = result[0].color;
+            //var amount = result[0].amount;
+            //var remarks = result[0].remarks;
+            var list = template.list(results);
+            var html = template.HTML(title, list,
+                //` <a href="/create">create</a><br>`
+                ` <form action="/update_process" method="post">
+                    <input type="hidden" name="seq" value="${result[0].seq}">
+                    <input type="text" name="color" value="${result[0].color}">
+                    <input type="text" name="amount" value="${result[0].amount}">
+                    <input type="text" name="remarks" value="${result[0].remarks}">
+                    <button type="submit">수정하기</button>
+                  </form>`
+                  //`<a href="/create">create</a><br>`
+                   /* `<p>
+                      <input type="text" name="color" value="${result[0].color}">
+                    </p>
+                    <p>
+                      <input type="text" name="amount" value="${result[0].amount}">
+                    </p>
+                    <p>
+                      <input type="text" name="remarks" value="${result[0].remarks}">
+                    </p>
+                    <p>
+                      <button type="submit">수정하기</button>
+                    </p>
+                  </form>`*/
+                /*`  <form action="delete_process" method="post">
+                    <input type="hidden" name="seq" value="${queryData.id}">
+                    <input type="submit" value="delete">
+                  </form>`*/
+                /*` <table><tr><td>${title}<td></tr>
+                  <tr><td>${amount}<td></tr>
+                  <tr><td>${remarks}<td></tr></table>`*/
+                //` <a href="/update?id=${queryData.id}">update</a>`
+            );
+            response.writeHead(200);
+            response.end(html);
+        });
+    });
+}
+exports.create = function(request, response){
+    con.query(`SELECT * FROM queenny`, function(error,results){
+        var title = 'Create';
+        var list = template.list(results);
+        var html = template.HTML(title, list,
+          ` <form action="/create_process" method="post">
+              <input type="text" name="color" placeholder="Color No.">
+              <input type="text" name="amount" placeholder="수량">
+              <input type="text" name="remarks" placeholder="비고">
+              <input type="submit">
+            </form>`
+          //` <a href="/create">create</a>`
+        );
+        response.writeHead(200);
+        response.end(html);
+    });
+}
+exports.create_process = function(request, response){
+    var body = '';
+    request.on('data', function(data){
+        body = body + data;
+    });
+    request.on('end', function(){
+        var post = qs.parse(body);
+        con.query(`
+        INSERT INTO queenny (color, amount, remarks) 
+            VALUES(?, ?, ?)`,
+        [post.color, post.amount, post.remarks], 
+        function(error, result){
+            if(error){throw error;}
+            //response.writeHead(302, {Location: `/?id=${result.insertId}`});
+            response.writeHead(302, {Location: `/`});
+            response.end();
+        });
+    });
+}
+exports.update = function(request, response){
+    var _url = request.url;
+    var queryData = url.parse(_url, true).query;
+    con.query('SELECT * FROM queenny', function(error, results){
+        if(error){throw error;}
+        con.query(`SELECT * FROM queenny WHERE seq=?`,[queryData.id], function(error2, result){
+          if(error2){throw error2;}
+          var list = template.list(results);
+          var html = template.HTML(result[0].color, list,
+            ` <form action="/update_process" method="post">
+                <input type="hidden" name="seq" value="${result[0].seq}">
+                <p>
+                  <input type="text" name="color" value="${result[0].color}">
+                </p>
+                <p>
+                  <input type="text" name="amount" value="${result[0].amount}">
+                </p>
+                <p>
+                  <input type="text" name="remarks" value="${result[0].remarks}">
+                </p>
+                <p>
+                  <button type="submit">수정하기</button>
+                </p>
+              </form>`
+            //` <a href="/update?id=${result[0].seq}">update</a>`
+            //` <a href="/create">create</a> <a href="/update?id=${topic[0].id}">update</a>`
+          );
+          response.writeHead(200);
+          response.end(html);
+        });
+    });
+}
+exports.update_process=function(request, response){
+    var body = '';
+      request.on('data', function(data){
+        body = body + data;
+        console.log(body);
+      });
+      request.on('end', function(){
+          var post = qs.parse(body);
+          console.log(post);
+          con.query('UPDATE queenny SET color=?, amount=?, remarks=? WHERE seq=?', 
+            [post.color, post.amount, post.remarks, post.seq], function(error, result){
+            response.writeHead(302, {Location: `/queenny`});
+            //response.writeHead(302, {Location: `/update?id=${post.seq}`});
+            response.end();
+          })
+    });
+}
+exports.delete_process=function(request, response){
+    var body = '';
+      request.on('data', function(data){
+          body = body + data;
+      });
+      request.on('end', function(){
+          var post = qs.parse(body);
+          con.query('DELETE FROM queenny WHERE seq = ?', [post.seq], function(error, result){
+            if(error){
+              throw error;
+            }
+            response.writeHead(302, {Location: `/`});
+            response.end();
+          });
+    });
+}
+-->
