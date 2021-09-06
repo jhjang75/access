@@ -1,36 +1,29 @@
+<!--2021.09.05 Queenny Inventory Refactoring from Node.js-mySQL-->
+<!--// - Yunee Queenny Inventory Template, 08/09/2021~ -
+module.exports = {
+  HTML:function(title, list, control){
+    return `-->
 <!doctype html>
 <html>
 <head>
-  <title>Welcome</title>
+  <title>${title}</title>
   <meta charset="utf-8">
+  <style>
+    table, th, td { border: 1px solid black; border-collapse: collapse; }
+    table {width:100%;}
+    input:focus {outline:none;}
+    /* input {width:90%;border:0 solid black;} */
+  </style>
 </head>
 <body>
-  <!--2021.09.05 Queenny Inventory Refactoring from Node.js-mySQL
-// - Yunee Queenny Inventory Template, 08/09/2021~ -
-module.exports = {
-  HTML:function(title, list, control){
-    return `
-    <!doctype html>
-    <html>
-    <head>
-      <title>${title}</title>
-      <meta charset="utf-8">
-      <style>
-        table, th, td { border: 1px solid black; border-collapse: collapse; }
-        table {width:100%;}
-        input:focus {outline:none;}
-        /* input {width:90%;border:0 solid black;} */
-      </style>
-    </head>
-    <body>
-      <h3><a href="/">Main</a></h3>
-      <p>${control}</p>
-      <table>
-        ${list}
-      </table>
-    </body>
-    </html>
-    `;
+  <h3><a href="/">Main</a></h3>
+  <p>${control}</p>
+  <table>
+    ${list}
+  </table>
+</body>
+</html>
+<!--    `;
   },
   list:function(results){
     var l=results.length;
@@ -89,6 +82,14 @@ module.exports = {
   }
 }
 -->
+<!--
+<!doctype html>
+<html>
+<head>
+  <title>Welcome</title>
+  <meta charset="utf-8">
+</head>
+<body>
   <h1></h1>
   <input type="button" id="inventory" value="inventory" />
   <script type="text/javascript" src="inventory.js"></script>
@@ -105,3 +106,4 @@ module.exports = {
   </p>
 </body>
 </html>
+-->
