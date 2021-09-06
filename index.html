@@ -26,6 +26,24 @@ module.exports = {
     </form>
     <a href="/create">create</a>
   </p>
+  <div>
+    <form action="/update_process" method="post">
+      <input type="hidden" name="seq" value="${result[0].seq}">
+      <p>
+        <input type="text" name="color" value="${result[0].color}">
+      </p>
+      <p>
+        <input type="text" name="amount" value="${result[0].amount}">
+      </p>
+      <p>
+        <input type="text" name="remarks" value="${result[0].remarks}">
+      </p>
+      <p>
+        <button type="submit">수정하기</button>
+      </p>
+    </form>
+    <a href="/create">create</a> <a href="/update?id=${topic[0].id}">update</a>
+  </div>
   <table>
     ${list}
   </table>
