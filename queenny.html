@@ -14,31 +14,7 @@
 </head>
 <body>
   <h3><a href="/">Main</a></h3>
-  <script>
-    document.getElementById("demo").innerHTML =
-"Page location is " + window.location.href;
-    if(pathname === '/queenny'){
-          if(queryData.id === undefined){
-             queenny.home(request, response);
-          } else {
-             queenny.page(request, response);
-          }
-      //} else if(pathname === '/create'){
-          //queenny.create(request, response);
-      //} else if(pathname === '/create_process'){
-          //queenny.create_process(request, response);
-      } else if(pathname === '/update'){
-          queenny.update(request, response);
-      } else if(pathname === '/update_process'){
-          queenny.update_process(request, response);
-      //} else if(pathname === '/delete_process'){
-          //queenny.delete_process(request, response);
-      } else {
-          response.writeHead(404);
-          response.end('Not found');
-      }
-    //}).listen(80);
-  </script>
+  
   <div class="create">
     <form action="/create_process" method="post">
       <input type="text" name="color" placeholder="Color No.">
@@ -75,6 +51,33 @@
   <table>
     ${list}
   </table>
+  <div id="demo">
+    
+  </div>
+  <script>
+    document.getElementById("demo").innerHTML = "Page location is " + window.location.href;
+    if(pathname === '/queenny'){
+          if(queryData.id === undefined){
+             queenny.home(request, response);
+          } else {
+             queenny.page(request, response);
+          }
+      //} else if(pathname === '/create'){
+          //queenny.create(request, response);
+      //} else if(pathname === '/create_process'){
+          //queenny.create_process(request, response);
+      } else if(pathname === '/update'){
+          queenny.update(request, response);
+      } else if(pathname === '/update_process'){
+          queenny.update_process(request, response);
+      //} else if(pathname === '/delete_process'){
+          //queenny.delete_process(request, response);
+      } else {
+          response.writeHead(404);
+          response.end('Not found');
+      }
+    //}).listen(80);
+  </script>
 </body>
 </html>
 <!--    `;
