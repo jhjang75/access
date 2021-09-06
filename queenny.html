@@ -1,8 +1,5 @@
 <!--2021.09.05 Queenny Inventory Refactoring from Node.js-mySQL-->
-<!--// - Yunee Queenny Inventory Template, 08/09/2021~ -
-module.exports = {
-  HTML:function(title, list, control){
-    return `-->
+
 <!doctype html>
 <html>
 <head>
@@ -43,6 +40,12 @@ module.exports = {
       </p>
     </form>
     <a href="/create">create</a> <a href="/update?id=${topic[0].id}">update</a>
+  </div>
+  <div>
+    <form action="delete_process" method="post">
+      <input type="hidden" name="seq" value="${queryData.id}">
+      <input type="submit" value="delete">
+    </form>
   </div>
   <table>
     ${list}
