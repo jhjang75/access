@@ -51,8 +51,12 @@
   <table>
     ${list}
   </table>
+  <p id="demo"></p>
+  <script>
+    document.getElementById("demo").innerHTML = 
+    "The full URL of this page is:<br>" + window.location.href;
+  </script>
   <div id="demo">
-    
   </div>
   <script>
     document.getElementById("demo").innerHTML = "Page location is " + window.location.href;
