@@ -58,9 +58,9 @@
     } else{
         document.getElementById("queenny").innerHTML = 
         `
-        <div class="delete">
+        <div class="delete">${pathname}
             <form action="delete_process" method="post">
-                <input type="hidden" name="seq" value="${queryData.id}">
+                <input type="hidden" name="seq" value="{queryData.id}">
                 <input type="submit" value="delete">
             </form>
         </div>
