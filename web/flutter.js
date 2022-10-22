@@ -42,7 +42,7 @@ _flutter.loader = null;
      */
     loadEntrypoint(options) {
       const {
-        entrypointUrl = "main.dart.js",
+        entrypointUrl = "./access/web/main.dart.js",
         serviceWorker,
       } = (options || {});
       return this._loadWithServiceWorker(entrypointUrl, serviceWorker);
@@ -68,7 +68,7 @@ _flutter.loader = null;
         this._scriptLoaded = new Promise((resolve, reject) => {
           let scriptTag = document.createElement("script");
           scriptTag.src = entrypointUrl;
-          scriptTag.type = "application/javascript";
+          scriptTag.type = "./access/web/application/javascript";
           // Cache the resolve, so it can be called from Flutter.
           // Note: Flutter hot restart doesn't re-create this promise, so this
           // can only be called once. Instead, we need to model this as a stream
@@ -112,7 +112,7 @@ _flutter.loader = null;
         timeoutMillis = 4000,
       } = serviceWorkerOptions;
 
-      let serviceWorkerUrl = "flutter_service_worker.js?v=" + serviceWorkerVersion;
+      let serviceWorkerUrl = "./access/web/flutter_service_worker.js?v=" + serviceWorkerVersion;
       let loader = navigator.serviceWorker.register(serviceWorkerUrl)
           .then((reg) => {
             if (!reg.active && (reg.installing || reg.waiting)) {
